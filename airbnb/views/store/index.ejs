@@ -1,0 +1,48 @@
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/nav') %>
+
+    <main>
+        <div class="heading"> 
+        <h1>Welcome to Airbnb</h1>
+        </div>
+        <h2>Here are registered homes</h2>
+        
+        <div class="homes-container">
+            <% if (registeredHome && registeredHome.length > 0) { %>
+                <% registeredHome.forEach(home =>{ %>
+                    <div class="home-card">
+                        <div class="home-image">
+                            <img src="<%= home.photoUrl %>" alt="<%= home.homeName %>">
+                        </div>
+                        <div class="home-details">
+                            <h3><%= home.homeName %></h3>
+                            <div class="detail-item">
+                                <span class="label">Location:</span>
+                                <span class="value"><%= home.location %></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Price:</span>
+                                <span class="value">₹<%= home.price %>/night</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Rating:</span>
+                                <span class="value rating"><%= home.rating %></span>
+                            </div>
+                            <div class="detail-item">
+                                <a class="button" href="/home/<%=home._id%>">Details</a>
+                            </div>
+                            <div class="detail-item">
+                                <button class="button">Book</button>
+                            </div>
+                        </div>
+                    
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p class="no-homes">No homes have been added yet. <a href="/host/add-home">Add a home</a></p>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>

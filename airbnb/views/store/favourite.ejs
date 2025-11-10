@@ -1,0 +1,45 @@
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/nav') %>
+
+    <main>
+        <h2>Here are your favourite homes</h2>
+        <div class="homes-container">
+            <% if (favouriteHomes && favouriteHomes.length > 0) { %>
+                <% favouriteHomes.forEach(home =>{ %>
+                    <div class="home-card">
+                        <div class="home-image">
+                            <img src="<%= home.photoUrl %>" alt="<%= home.homeName %>">
+                        </div>
+                        <div class="home-details">
+                            <h3><%= home.homeName %></h3>
+                            <div class="detail-item">
+                                <span class="label">Location:</span>
+                                <span class="value"><%= home.location %></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Price:</span>
+                                <span class="value">₹<%= home.price %>/night</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Rating:</span>
+                                <span class="value rating"><%= home.rating %></span>
+                            </div>
+                            <div class="detail-item">
+                                <a class="button" href="/home/<%=home._id%>">Details</a>
+                                <form action="/remove-favourite/<%=home._id%>" method="post">
+                                <button type="submit" class="button">Remove From Favourite</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p class="no-homes">No homes have been added yet.<a href="/home-list">Add a home</a></p>
+            <% } %>
+        </div>
+    </main>
+
+
+</body>
+</html>
